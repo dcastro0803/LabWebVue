@@ -1,0 +1,147 @@
+<head>
+	<script src="https://npmcdn.com/vue/dist/vue.js"></script>
+	<!-- CSS only -->
+	<link
+		rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+		crossorigin="anonymous"
+	/>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<!-- -->
+<div id="app">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarTogglerDemo01"
+			aria-controls="navbarTogglerDemo01"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			<a class="navbar-brand" href="./index.html">Daniel</a>
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item active">
+					<a class="nav-link" href="./index.html">
+						Home
+						<span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="./contact.html">Contact</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!-- Place an initial intro about what the page is about-->
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container border border-primary rounded-sm">
+			<h1 class="display-4">{{title}}</h1>
+			<p class="lead">
+				Here are some ideas about different activities that you can do
+				in different parts of the world :)
+			</p>
+		</div>
+	</div>
+
+	<button @click="fetchData()">Set new value</button>
+	<button @click="toggle1 = !toggle1">Disappear Puppy #2</button>
+	<h2>You typed {{info}}</h2>
+	<input type="text" v-model="info" />
+	<div class="container-sm">
+		<div class="row">
+			<div class="col-sm">
+				<div class="card" style="width: 18rem;">
+					<img class="card-img-top" v-bind:src="image" />
+					<div class="card-body">
+						<h5 class="card-title">Puppy #1</h5>
+						<p class="card-text">
+							Check info of puppy
+						</p>
+						<a
+							href="https://www.websitehostingrating.com/cybersecurity-statistics-facts/"
+							class="btn btn-primary"
+							>Visit Website for more facts</a
+						>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div v-if="toggle1" class="container-fluid">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" v-bind:src="image2" />
+						<div class="card-body">
+							<h5 class="card-title">Puppy #2</h5>
+							<p class="card-text">
+								Check info of puppy
+							</p>
+							<a
+								href="https://www.csoonline.com/article/3153707/top-cybersecurity-facts-figures-and-statistics.html"
+								class="btn btn-primary"
+								>Visit Website for more facts
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--<img style="width: 300px; height: 300px;" v-bind:src="image" /> -->
+	<!-- Botton disappear element -->
+	<div>
+		<!-- <button @click="toggle1 = !toggle1">Disappear Puppy #2</button> -->
+		<p v-if="toggle1">Everything is normal</p>
+		<p v-else>You disappeared puppy #2</p>
+		<!-- <p v-show="toggle1">You either see me ...</p>
+		<p v-show="!toggle1">...or me</p> -->
+	</div>
+	<!-- botton change pet image -->
+	<!-- <button @click="fetchData()">Set new value</button> -->
+	<!-- <h2>You typed {{info}}</h2>
+	<input type="text" v-model="info" /> -->
+</div>
+
+<script>
+	var app = new Vue({
+		el: "#app",
+		data: {
+			title: "Check the puppies :)",
+			message: "Hello Vue!",
+			info: "Nothing",
+			image:
+				"https://images.dog.ceo/breeds/terrier-kerryblue/n02093859_640.jpg",
+			image2:
+				"https://images.dog.ceo/breeds/terrier-kerryblue/n02093859_640.jpg",
+			toggle1: true,
+		},
+		methods: {
+			randomBetween: function (from, to) {
+				return Math.floor(Math.random() * to) + from;
+			},
+			fetchData: function () {
+				fetch(" https://dog.ceo/api/breeds/image/random")
+					.then((res) => res.json())
+					.then((myJson) => {
+						console.log(myJson);
+						console.log(this.image);
+						this.image = myJson.message;
+						//this.users = myJson
+					});
+				fetch(" https://dog.ceo/api/breeds/image/random")
+					.then((res) => res.json())
+					.then((myJson) => {
+						console.log(myJson);
+						console.log(this.image);
+						this.image2 = myJson.message;
+						//this.users = myJson
+					});
+			},
+		},
+	});
+</script>

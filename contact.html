@@ -1,0 +1,80 @@
+<head>
+	<script src="https://npmcdn.com/vue/dist/vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<link
+		rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+		crossorigin="anonymous"
+	/>
+</head>
+<!-- -->
+<div id="app">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarTogglerDemo01"
+			aria-controls="navbarTogglerDemo01"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			<a class="navbar-brand" href="./index.html">Daniel</a>
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item active">
+					<a class="nav-link" href="./index.html"
+						>Home<span class="sr-only">(current)</span></a
+					>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="./contact.html">Contact</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="jumbotron">
+		<h1 class="display-4">Contact us!!!!!</h1>
+		<hr class="my-4" />
+		<p>
+			Click the button to contact us sending a email to contact@gmail.com
+		</p>
+		<a
+			class="btn btn-primary btn-lg"
+			href="mailto:contact@gmail.com"
+			role="button"
+			>Contact sending email</a
+		>
+	</div>
+</div>
+
+<script>
+	var app = new Vue({
+		el: "#app",
+		data: {
+			message: "Hello Vue!",
+			info: "Nothing",
+			image:
+				"https://images.dog.ceo/breeds/terrier-kerryblue/n02093859_640.jpg",
+			toggle1: true,
+		},
+		methods: {
+			randomBetween: function (from, to) {
+				return Math.floor(Math.random() * to) + from;
+			},
+			fetchData: function () {
+				fetch(" https://dog.ceo/api/breeds/image/random")
+					.then((res) => res.json())
+					.then((myJson) => {
+						console.log(myJson);
+						console.log(this.image);
+						this.image = myJson.message;
+						//this.users = myJson
+					});
+			},
+		},
+	});
+</script>
